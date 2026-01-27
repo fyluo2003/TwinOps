@@ -5,7 +5,7 @@
 > 一个基于数字孪生技术的智能运维平台，专注于国家电网设备监控，并引入大模型进行设备状态预测和故障分析。
 
 <h1 align="center">
-  <img src="https://raw.githubusercontent.com/fengtianxi001/MF-StationMonitor/main/screenshots/screenshot01.png" title="TwinOps System" width="800">
+  <img src="./screenshots/screenshot01.png" title="TwinOps System" width="800">
 </h1>
 
 ## 📋 项目概述

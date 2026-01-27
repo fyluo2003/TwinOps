@@ -14,16 +14,56 @@
       ></div>
     </div>
     <div class="header-right">
-      <span>12:00:00</span>
-      <span>2024-12-34</span>
-      <span>Monday</span>
-      <span>13°c</span>
+      <span>{{ currentTime }}</span>
+      <span>{{ currentDate }}</span>
+      <span>{{ currentDay }}</span>
     </div>
   </div>
 </template>
 <script setup lang="ts">
-// interface PropsType {}
-// const props = defineProps<PropsType>()
+import { ref, onMounted, onUnmounted } from "vue";
+
+// 获取当前时间
+const currentTime = ref("");
+const currentDate = ref("");
+const currentDay = ref("");
+
+// 格式化时间
+const formatTime = () => {
+  const date = new Date();
+
+  // 时间格式化：HH:MM:SS
+  const hours = date.getHours().toString().padStart(2, "0");
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+  const seconds = date.getSeconds().toString().padStart(2, "0");
+  currentTime.value = `${hours}:${minutes}:${seconds}`;
+
+  // 日期格式化：YYYY-MM-DD
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const day = date.getDate().toString().padStart(2, "0");
+  currentDate.value = `${year}-${month}-${day}`;
+
+  // 星期几
+  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  currentDay.value = days[date.getDay()];
+};
+
+let timer: number | null = null;
+
+// 组件挂载时开始更新时间
+onMounted(() => {
+  formatTime();
+  timer = window.setInterval(formatTime, 1000);
+});
+
+// 组件卸载时清除定时器
+onUnmounted(() => {
+  if (timer) {
+    clearInterval(timer);
+    timer = null;
+  }
+});
 </script>
 <style lang="scss" scoped>
 @mixin font-color() {

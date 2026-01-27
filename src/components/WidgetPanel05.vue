@@ -22,8 +22,10 @@ import LayoutPanel from "./LayoutPanel.vue";
   height: 100%;
   margin-top: 10px;
   font-size: 40px;
-  color: #fff;
-  background-color: rgba(93, 101, 122, 20%);
+  color: #64748b;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
   video {
     width: 100%;
     height: 100%;

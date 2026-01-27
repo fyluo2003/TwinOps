@@ -33,9 +33,9 @@ const warmingStyle = computed(() => {
   style.cursor = "pointer";
 
   if (state.isWarming) {
-    style.color = "#5bc7fa";
+    style.color = "#3b82f6";
   } else {
-    style.color = "#fff";
+    style.color = "#1e293b";
   }
   return style;
 });
@@ -51,9 +51,7 @@ const warmingStyle = computed(() => {
   justify-content: center;
   width: 100%;
   height: 100px;
-  background-image: url("@/assets/footer_bg.png");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
   .item {
     display: flex;
     align-items: center;
@@ -61,11 +59,18 @@ const warmingStyle = computed(() => {
     width: 170px;
     height: 50px;
     font-family: Douyu;
-    color: #fff;
+    color: #1e293b;
     cursor: pointer;
-    background-image: url("@/assets/footer_item_bg.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
+    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      transform: translateY(-1px);
+    }
   }
 }
 </style>

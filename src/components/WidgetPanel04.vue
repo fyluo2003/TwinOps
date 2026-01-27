@@ -104,7 +104,16 @@ const source = [
     width: 100%;
     height: 100%;
     padding: 0 8px;
-    background-color: rgba(93, 101, 122, 16%);
+    background-color: rgba(248, 250, 252, 1);
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      transform: translateY(-1px);
+    }
+
     .weather-icon {
       display: flex;
       grid-row: 1 /3;
@@ -112,19 +121,19 @@ const source = [
       justify-content: center;
       width: $icon-size;
       height: $icon-size;
-      border: 1px solid #5bc7fa;
+      border: 1px solid #3b82f6;
       border-radius: 50%;
-
-      // box-shadow: 0 0 10px #75fbb87d;
+      color: #3b82f6;
     }
     .weather-label {
       margin-top: 10px;
       font-size: 13px;
-      color: #999;
+      color: #64748b;
     }
     .weather-value {
       margin-bottom: 6px;
       font-size: 14px;
+      color: #1e293b;
     }
   }
 }

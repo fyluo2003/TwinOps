@@ -180,11 +180,11 @@ const onClose = () => {
   transform: translate(-50%, -50%);
   width: 700px;
   max-height: 80vh;
-  background-color: rgba(0, 0, 0, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: #fff;
+  border: 1px solid #e2e8f0;
   border-radius: 12px;
   z-index: 99999;
-  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
   user-select: text;
 
   * {
@@ -196,12 +196,12 @@ const onClose = () => {
     justify-content: space-between;
     align-items: center;
     padding: 15px 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid #e2e8f0;
 
     .title {
       font-size: 18px;
       font-weight: bold;
-      color: #fff;
+      color: #1e293b;
     }
 
     .close-btn {
@@ -210,13 +210,13 @@ const onClose = () => {
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #fff;
+      color: #64748b;
       font-size: 24px;
       cursor: pointer;
       transition: all 0.3s;
 
       &:hover {
-        background-color: rgba(255, 255, 255, 0.1);
+        background-color: #f1f5f9;
         border-radius: 50%;
       }
     }
@@ -233,10 +233,10 @@ const onClose = () => {
       .info-title {
         font-size: 16px;
         font-weight: bold;
-        color: #fff;
+        color: #1e293b;
         margin-bottom: 15px;
         padding-bottom: 5px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 1px solid #e2e8f0;
       }
 
       .info-item {
@@ -245,31 +245,32 @@ const onClose = () => {
         align-items: center;
         padding: 10px;
         margin-bottom: 8px;
-        background-color: rgba(255, 255, 255, 0.05);
+        background-color: #f8fafc;
         border-radius: 8px;
+        border: 1px solid #e2e8f0;
 
         .info-label {
           font-size: 14px;
-          color: #999;
+          color: #64748b;
           min-width: 100px;
         }
 
         .info-value {
           font-size: 14px;
-          color: #fff;
+          color: #1e293b;
           text-align: right;
           flex: 1;
 
           &.status-normal {
-            color: #74fabd;
+            color: #10b981;
           }
 
           &.status-warning {
-            color: #f1bd49;
+            color: #f59e0b;
           }
 
           &.status-error {
-            color: #ff0000;
+            color: #ef4444;
           }
         }
       }
@@ -280,8 +281,9 @@ const onClose = () => {
           align-items: center;
           padding: 10px;
           margin-bottom: 8px;
-          background-color: rgba(255, 255, 255, 0.05);
+          background-color: #f8fafc;
           border-radius: 8px;
+          border: 1px solid #e2e8f0;
 
           .alarm-icon {
             width: 30px;
@@ -299,13 +301,13 @@ const onClose = () => {
 
             .alarm-name {
               font-size: 14px;
-              color: #fff;
+              color: #1e293b;
               margin-bottom: 3px;
             }
 
             .alarm-time {
               font-size: 12px;
-              color: #666;
+              color: #94a3b8;
             }
           }
         }
@@ -320,16 +322,16 @@ const onClose = () => {
 }
 
 .content::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
+  background: #f1f5f9;
   border-radius: 3px;
 }
 
 .content::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
+  background: #cbd5e1;
   border-radius: 3px;
 }
 
 .content::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: #94a3b8;
 }
 </style>

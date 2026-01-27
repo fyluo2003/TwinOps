@@ -228,12 +228,12 @@ const container = ref();
 
 const generateTypeColor = (type: 1 | 2 | 3, gradual = false) => {
   const colors = {
-    1: "#74fabd",
-    2: "#5bc7fa",
-    3: "#f1bd49",
+    1: "#10b981", // 绿色 - 低风险
+    2: "#3b82f6", // 蓝色 - 中等风险
+    3: "#f59e0b", // 橙色 - 高风险
   };
   if (gradual) {
-    return `linear-gradient(90deg, ${colors[type]}77 , transparent )`;
+    return `linear-gradient(90deg, ${colors[type]}20 , transparent )`;
   }
   return colors[type];
 };
@@ -297,22 +297,36 @@ onUnmounted(() => {
     align-items: center;
     padding: 5px;
     font-size: 16px;
+    background-color: #f8fafc;
+    border-radius: 4px;
+    border: 1px solid #e2e8f0;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: #f1f5f9;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
     .item-circle {
       position: absolute;
       left: 10px;
       width: 5px;
       height: 10px;
+      border-radius: 2px;
     }
     .item-name {
       width: 50%;
       padding-left: 15px;
+      color: #1e293b;
     }
     .item-type {
       width: 30%;
+      color: #475569;
     }
     .item-time {
       width: 20%;
       text-align: end;
+      color: #64748b;
     }
   }
 }

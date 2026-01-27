@@ -15,15 +15,15 @@ const generateOptions = () => ({
     show: true,
     right: 0,
     textStyle: {
-      color: "#fff",
+      color: "#666",
     },
   },
   tooltip: {
     trigger: "axis" as const,
-    backgroundColor: "#000",
-    borderColor: "#333",
+    backgroundColor: "#fff",
+    borderColor: "#e0e0e0",
     textStyle: {
-      color: "#fff",
+      color: "#333",
     },
   },
   grid: {
@@ -42,7 +42,7 @@ const generateOptions = () => ({
       show: false,
     },
     axisLabel: {
-      color: "#fff",
+      color: "#666",
       margin: 10,
     },
     data: [...Array(30).keys()],
@@ -50,11 +50,11 @@ const generateOptions = () => ({
   yAxis: {
     type: "value" as const,
     axisLabel: {
-      color: "#fff",
+      color: "#666",
     },
     splitLine: {
       lineStyle: {
-        color: "#c8c8c830",
+        color: "#e0e0e0",
         type: "dashed" as const,
       },
     },
@@ -67,8 +67,8 @@ const generateOptions = () => ({
       type: "bar" as const,
       itemStyle: {
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-          { offset: 0, color: "rgba(0, 254, 169, 1)" },
-          { offset: 1, color: "rgba(65, 138, 255, 0.2)" },
+          { offset: 0, color: "rgba(59, 130, 246, 1)" },
+          { offset: 1, color: "rgba(59, 130, 246, 0.2)" },
         ]),
       },
     },

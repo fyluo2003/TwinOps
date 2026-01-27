@@ -78,10 +78,8 @@ provide("events", { startWarming, stopWarming, enableControls, disableControls }
 .layout {
   width: 100%;
   height: 100%;
-  background-color: #000;
-  background-image: url(@/assets/page_bg.png);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-color: #f5f7fa;
+  background-image: none;
   .layout-main {
     position: relative;
     width: 100%;
@@ -127,7 +125,7 @@ provide("events", { startWarming, stopWarming, enableControls, disableControls }
         height: 100%;
         pointer-events: none;
         content: "";
-        background-image: radial-gradient(circle, transparent 30%, #000 60%);
+        background-image: radial-gradient(circle, transparent 30%, rgba(245, 247, 250, 0.6) 60%);
       }
     }
     .mask {
@@ -137,7 +135,7 @@ provide("events", { startWarming, stopWarming, enableControls, disableControls }
       z-index: 9998;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.3);
+      background-color: rgba(0, 0, 0, 0.1);
       pointer-events: none;
     }
   }

@@ -17,16 +17,14 @@ const { title } = defineProps<PropsType>();
 <style lang="scss" scoped>
 .layout-panel {
   position: relative;
-  color: #fff;
-  background-image: url("@/assets/panel_body_bg.png");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
+  color: #333;
+  background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 0 20px rgba(0, 254, 169, 0.1);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 
   &:hover {
-    box-shadow: 0 0 30px rgba(0, 254, 169, 0.2);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
     transform: translateY(-2px);
   }
 
@@ -35,9 +33,8 @@ const { title } = defineProps<PropsType>();
     align-items: center;
     height: 65px;
     font-family: Douyu;
-    background-image: url("@/assets/panel_title_bg.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border-radius: 8px 8px 0 0;
     .panel-header-title {
       position: relative;
       top: -12px;
@@ -45,7 +42,7 @@ const { title } = defineProps<PropsType>();
       font-size: 15px;
       font-weight: bold;
       letter-spacing: 1px;
-      text-shadow: 0 0 10px rgba(0, 254, 169, 0.5);
+      color: #2c3e50;
     }
   }
   .panel-body {

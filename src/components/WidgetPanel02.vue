@@ -16,15 +16,15 @@ const generateOptions = (sources: number[][]) => ({
     show: true,
     right: 0,
     textStyle: {
-      color: "#fff",
+      color: "#666",
     },
   },
   tooltip: {
     trigger: "axis" as const,
-    backgroundColor: "#000",
-    borderColor: "#333",
+    backgroundColor: "#fff",
+    borderColor: "#e0e0e0",
     textStyle: {
-      color: "#fff",
+      color: "#333",
     },
   },
   grid: {
@@ -44,7 +44,7 @@ const generateOptions = (sources: number[][]) => ({
       show: false,
     },
     axisLabel: {
-      color: "#fff",
+      color: "#666",
       margin: 20,
     },
     data: ["11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00"],
@@ -52,11 +52,11 @@ const generateOptions = (sources: number[][]) => ({
   yAxis: {
     type: "value" as const,
     axisLabel: {
-      color: "#c8c8c8",
+      color: "#666",
     },
     splitLine: {
       lineStyle: {
-        color: "#c8c8c830",
+        color: "#e0e0e0",
         type: "dashed" as const,
       },
     },
@@ -69,10 +69,10 @@ const generateOptions = (sources: number[][]) => ({
       smooth: true,
       lineStyle: {
         width: 2,
-        color: "rgba(0, 254, 169, 1)",
+        color: "rgba(59, 130, 246, 1)",
       },
       itemStyle: {
-        color: "rgba(0, 254, 169, 0.5)",
+        color: "rgba(59, 130, 246, 0.5)",
       },
       // areaStyle: {},
       data: sources[0],
@@ -85,11 +85,11 @@ const generateOptions = (sources: number[][]) => ({
       lineStyle: {
         normal: {
           width: 2,
-          color: "rgba(87, 153, 214, 1)",
+          color: "rgba(16, 185, 129, 1)",
         },
       },
       itemStyle: {
-        color: "rgba(87, 153, 214, 0.5)",
+        color: "rgba(16, 185, 129, 0.5)",
       },
       // areaStyle: {},
       data: sources[1],
@@ -102,11 +102,11 @@ const generateOptions = (sources: number[][]) => ({
       lineStyle: {
         normal: {
           width: 2,
-          color: "rgba(241, 189, 73, 1)",
+          color: "rgba(245, 158, 11, 1)",
         },
       },
       itemStyle: {
-        color: "rgba(241, 189, 73, 0.5)",
+        color: "rgba(245, 158, 11, 0.5)",
       },
       // areaStyle: {},
       data: sources[2],

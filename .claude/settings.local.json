@@ -23,7 +23,8 @@
       "Bash(netstat:*)",
       "Bash(PUPPETEER_SKIP_DOWNLOAD=true npm install:*)",
       "Bash(npm exec puppeteer:*)",
-      "Bash(taskkill:*)"
+      "Bash(taskkill:*)",
+      "Bash(npm run preview)"
     ]
   }
 }

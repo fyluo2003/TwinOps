@@ -46,16 +46,16 @@ const generateOptions = () => ({
   },
   tooltip: {
     trigger: "axis" as const,
-    backgroundColor: "#000",
-    borderColor: "#333",
+    backgroundColor: "#fff",
+    borderColor: "#e0e0e0",
     textStyle: {
-      color: "#fff",
+      color: "#333",
     },
     formatter(params: any) {
       const data = params[0];
       return `<div style="padding: 5px 0;">
-          <div style="color: #fff; font-size: 14px;">${data.name}</div>
-          <div style="color: #00fea9; font-size: 16px; margin-top: 5px;">故障变化率: ${data.value}%</div>
+          <div style="color: #333; font-size: 14px;">${data.name}</div>
+          <div style="color: #3b82f6; font-size: 16px; margin-top: 5px;">故障变化率: ${data.value}%</div>
         </div>`;
     },
   },
@@ -75,7 +75,7 @@ const generateOptions = () => ({
       show: false,
     },
     axisLabel: {
-      color: "#fff",
+      color: "#666",
       margin: 10,
       fontSize: 12,
       interval: 9, // 每隔 10 个数据点显示一个标签，避免重叠
@@ -86,15 +86,15 @@ const generateOptions = () => ({
     type: "value" as const,
     name: "故障变化率(%)",
     nameTextStyle: {
-      color: "#fff",
+      color: "#666",
       fontSize: 12,
     },
     axisLabel: {
-      color: "#fff",
+      color: "#666",
     },
     splitLine: {
       lineStyle: {
-        color: "#c8c8c830",
+        color: "#e0e0e0",
         type: "dashed" as const,
       },
     },
@@ -108,13 +108,13 @@ const generateOptions = () => ({
       smooth: true,
       symbol: "none",
       lineStyle: {
-        color: "rgba(0, 254, 169, 1)",
+        color: "rgba(59, 130, 246, 1)",
         width: 2,
       },
       areaStyle: {
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-          { offset: 0, color: "rgba(0, 254, 169, 0.3)" },
-          { offset: 1, color: "rgba(0, 254, 169, 0.01)" },
+          { offset: 0, color: "rgba(59, 130, 246, 0.3)" },
+          { offset: 1, color: "rgba(59, 130, 246, 0.01)" },
         ]),
       },
       data: generateRateData(),

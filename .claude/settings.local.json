@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm view:*)",
+      "Bash(powershell.exe -Command \"Remove-Item -Recurse -Force node_modules, package-lock.json -ErrorAction SilentlyContinue\")",
+      "Bash(npm install:*)",
+      "Read(//c/Users/luofeiyun/nodejs/**)",
+      "Bash(cmd.exe /c \"npm install --force\")",
+      "Bash(npm run build)",
+      "Bash(npm run dev:*)",
+      "Bash(echo:*)",
+      "Bash(npm run type-check)",
+      "Bash(npm ls:*)",
+      "Bash(node:*)",
+      "Bash(dir:*)",
+      "Bash(curl:*)",
+      "Bash(npm init @eslint/config:*)",
+      "Bash(npm run lint:*)",
+      "Bash(tasklist:*)",
+      "Bash(npx puppeteer browsers install:*)",
+      "Bash(powershell:*)",
+      "Bash(start:*)",
+      "Bash(netstat:*)",
+      "Bash(PUPPETEER_SKIP_DOWNLOAD=true npm install:*)",
+      "Bash(npm exec puppeteer:*)",
+      "Bash(taskkill:*)"
+    ]
+  }
+}

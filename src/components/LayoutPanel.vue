@@ -17,15 +17,18 @@ const { title } = defineProps<PropsType>();
 <style lang="scss" scoped>
 .layout-panel {
   position: relative;
-  color: #333;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  color: #e2e8f0;
+  background: rgba(30, 41, 59, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
 
   &:hover {
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
     transform: translateY(-2px);
+    border-color: rgba(148, 163, 184, 0.4);
   }
 
   .panel-header {
@@ -33,8 +36,9 @@ const { title } = defineProps<PropsType>();
     align-items: center;
     height: 65px;
     font-family: Douyu;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    border-radius: 8px 8px 0 0;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.3) 0%, rgba(147, 197, 253, 0.2) 100%);
+    border-radius: 12px 12px 0 0;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.3);
     .panel-header-title {
       position: relative;
       top: -12px;
@@ -42,7 +46,7 @@ const { title } = defineProps<PropsType>();
       font-size: 15px;
       font-weight: bold;
       letter-spacing: 1px;
-      color: #2c3e50;
+      color: #60a5fa;
     }
   }
   .panel-body {

@@ -19,6 +19,21 @@ const handleLabelClick = () => {
   eventBus.emit("showDeviceDetail", getDeviceData());
 };
 
+// 预警设备名称列表（与 WidgetPanel06.vue 中的预警列表对应）
+const alarmDeviceNames = [
+  "1# 服务器机柜",
+  "2# 服务器机柜",
+  "3# 服务器机柜",
+  "1# 网络设备",
+  "6# 网络设备",
+  "1# 电源柜",
+  "2# 电源柜",
+  "3# 电源柜",
+  "4# 电源柜",
+  "5# 电源柜",
+  "6# 电源柜"
+];
+
 // 生成设备详细数据
 const getDeviceData = () => {
   // 根据设备名称生成对应的设备数据
@@ -48,21 +63,26 @@ const getDeviceData = () => {
   // 根据设备名称判断设备类型
   if (props.name.includes("服务器机柜")) {
     baseData.type = "服务器机柜";
-    baseData.status = "normal";
+    // 检查是否在预警列表中
+    baseData.status = alarmDeviceNames.includes(props.name) ? "error" : "normal";
     baseData.alarms = [
       { id: 1, name: "温度过高", type: "warning", time: "10:23" },
       { id: 2, name: "内存过载", type: "error", time: "09:15" },
     ];
   } else if (props.name.includes("网络设备")) {
     baseData.type = "网络设备";
-    baseData.status = "warning";
+    baseData.status = alarmDeviceNames.includes(props.name) ? "warning" : "normal";
     baseData.alarms = [
       { id: 1, name: "网络延迟过高", type: "warning", time: "11:05" },
     ];
   } else if (props.name.includes("电源柜")) {
     baseData.type = "电源柜";
-    baseData.status = "normal";
-    baseData.alarms = [];
+    // 检查是否在预警列表中
+    baseData.status = alarmDeviceNames.includes(props.name) ? "error" : "normal";
+    baseData.alarms = [
+      { id: 1, name: "电压波动", type: "warning", time: "09:44" },
+      { id: 2, name: "电流过高", type: "error", time: "12:53" },
+    ];
   } else {
     baseData.type = "其他设备";
     baseData.status = "normal";

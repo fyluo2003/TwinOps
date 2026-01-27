@@ -5,7 +5,7 @@
       <div class="close-btn" @click="onClose">×</div>
     </div>
     <div class="content">
-      <div class="device-item" v-for="item in alarmDevices" :key="item.id">
+      <div class="device-item" v-for="item in devices" :key="item.id">
         <div class="device-info">
           <div class="device-name">{{ item.name }}</div>
           <div class="device-event">{{ item.event }}</div>
@@ -22,7 +22,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, defineProps, defineEmits } from "vue";
+import { defineProps, defineEmits } from "vue";
 
 interface AlarmDevice {
   id: number;
@@ -39,8 +39,6 @@ const props = defineProps<{
 const emit = defineEmits<{
   close: [];
 }>();
-
-const alarmDevices = ref<AlarmDevice[]>(props.devices);
 
 const getTypeColor = (type: 1 | 2 | 3) => {
   const colors = {

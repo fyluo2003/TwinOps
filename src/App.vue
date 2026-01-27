@@ -4,14 +4,14 @@
     <LayoutFooter />
     <LayoutLoading :loading="loading" />
     <div class="layout-main">
+      <!-- 左侧看板区域 -->
       <div class="main-left">
         <WidgetPanel04 />
-      </div>
-      <div class="main-right">
         <WidgetPanel01 />
         <WidgetPanel06 />
       </div>
-      <div class="main-middle" ref="threeContainer"></div>
+      <!-- 右侧3D视图区域 -->
+      <div class="main-right" ref="threeContainer"></div>
       <div class="mask" v-if="showMask"></div>
     </div>
     <!-- 设备详情面板 -->
@@ -78,8 +78,7 @@ provide("events", { startWarming, stopWarming, enableControls, disableControls }
 .layout {
   width: 100%;
   height: 100%;
-  background-color: #f5f7fa;
-  background-image: none;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
   .layout-main {
     position: relative;
     width: 100%;
@@ -92,28 +91,16 @@ provide("events", { startWarming, stopWarming, enableControls, disableControls }
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
-      grid-gap: 25px;
-      width: 450px;
+      grid-gap: 20px;
+      width: 420px;
       height: calc(100% - 40px);
     }
     .main-right {
       position: absolute;
-      top: 20px;
-      right: 20px;
-      z-index: 999;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      grid-gap: 25px;
-      width: 450px;
-      height: calc(100% - 40px);
-    }
-    .main-middle {
-      position: absolute;
       top: 0;
-      left: 0;
+      left: 460px;
       z-index: 2;
-      width: 100%;
+      width: calc(100% - 460px);
       height: 100%;
       &::before {
         position: absolute;
@@ -125,7 +112,7 @@ provide("events", { startWarming, stopWarming, enableControls, disableControls }
         height: 100%;
         pointer-events: none;
         content: "";
-        background-image: radial-gradient(circle, transparent 30%, rgba(245, 247, 250, 0.6) 60%);
+        background-image: radial-gradient(circle, transparent 30%, rgba(15, 23, 42, 0.4) 60%);
       }
     }
     .mask {
@@ -135,7 +122,7 @@ provide("events", { startWarming, stopWarming, enableControls, disableControls }
       z-index: 9998;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.1);
+      background-color: rgba(0, 0, 0, 0.3);
       pointer-events: none;
     }
   }

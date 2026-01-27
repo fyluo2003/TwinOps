@@ -80,8 +80,6 @@ const source = [
 <style lang="scss" scoped>
 .container {
   height: 100%;
-
-  //   background-color: red;
 }
 .weather-monitor {
   box-sizing: border-box;
@@ -104,14 +102,15 @@ const source = [
     width: 100%;
     height: 100%;
     padding: 0 8px;
-    background-color: rgba(248, 250, 252, 1);
-    border: 1px solid #e2e8f0;
-    border-radius: 6px;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    border-radius: 8px;
     transition: all 0.3s ease;
 
     &:hover {
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
       transform: translateY(-1px);
+      border-color: rgba(96, 165, 250, 0.5);
     }
 
     .weather-icon {
@@ -121,19 +120,19 @@ const source = [
       justify-content: center;
       width: $icon-size;
       height: $icon-size;
-      border: 1px solid #3b82f6;
+      border: 1px solid #60a5fa;
       border-radius: 50%;
-      color: #3b82f6;
+      color: #60a5fa;
     }
     .weather-label {
       margin-top: 10px;
       font-size: 13px;
-      color: #64748b;
+      color: #94a3b8;
     }
     .weather-value {
       margin-bottom: 6px;
       font-size: 14px;
-      color: #1e293b;
+      color: #e2e8f0;
     }
   }
 }

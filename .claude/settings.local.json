@@ -24,7 +24,12 @@
       "Bash(PUPPETEER_SKIP_DOWNLOAD=true npm install:*)",
       "Bash(npm exec puppeteer:*)",
       "Bash(taskkill:*)",
-      "Bash(npm run preview)"
+      "Bash(npm run preview)",
+      "Bash(python -m http.server:*)",
+      "Bash(http-server:*)",
+      "Bash(gltfjsx:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ]
   }
 }

@@ -153,18 +153,35 @@ export function useDataCenter(externalContainer?: Ref<HTMLElement | null>) {
         const gltf: { scene: THREE.Group } = await loadGltf(
           Sources.DeviceModel
         );
-        // 安全地访问子对象
-        if (gltf.scene.children[4] && gltf.scene.children[4].children) {
-          devices.value.push(
-            ...(gltf.scene.children[4].children as unknown as THREE.Mesh[])
-          );
-        } else {
-          console.warn("设备模型结构不符合预期");
-        }
+        // 打印设备模型结构
+        console.log("设备模型结构:", gltf.scene);
+        console.log("设备模型子对象:", gltf.scene.children);
+        gltf.scene.children.forEach((child, index) => {
+          console.log(`子对象 ${index}:`, child.name);
+          if (child.children) {
+            child.children.forEach((grandChild, grandIndex) => {
+              console.log(`  孙对象 ${grandIndex}:`, grandChild.name);
+            });
+          }
+        });
+
+        // 查找并加载所有设备组的设备
+        // 遍历场景所有子对象，找到所有可能包含设备的组
+        gltf.scene.children.forEach((child, index) => {
+          if (child.name.includes("设备") && child.children) {
+            console.log(`加载设备组 ${index}: ${child.name}，包含 ${child.children.length} 个设备`);
+            devices.value.push(
+              ...(child.children as unknown as THREE.Mesh[])
+            );
+          }
+        });
+
+        console.log("加载的设备总数:", devices.value.length);
         loading.loaded += 1;
         models.devices = gltf.scene;
         scene.value!.add(gltf.scene);
         console.log("设备模型加载成功");
+        console.log("加载的设备数量:", devices.value.length);
       } catch (error) {
         console.error("设备模型加载失败:", error);
         loading.loaded += 1; // 即使失败，也要增加加载计数，避免界面卡死
@@ -188,28 +205,31 @@ export function useDataCenter(externalContainer?: Ref<HTMLElement | null>) {
       loadDeviceModel(),
       loadLineModel(),
     ]);
+    // 移除道路箭头
+    removeRoadArrows();
+    // 打印设备加载信息
+    console.log("设备数组长度:", devices.value.length);
+    console.log("设备数组内容:", devices.value);
+    // 自动启动模拟告警（常开）
+    startWarming();
     loading.isLoading = false;
     loading.loaded = 3;
   };
-  // 添加道路箭头动画
-  const addRoadArrowAnimation = () => {
+  // 移除道路箭头
+  const removeRoadArrows = () => {
     if (!models.building) return;
-    const textures: THREE.Texture[] = [];
+    const arrowsToRemove: THREE.Object3D[] = [];
     models.building.traverse((mesh: THREE.Object3D) => {
       if ("name" in mesh && mesh.name.includes("道路箭头")) {
-        const meshWithMaterial = mesh as unknown as {
-          material: { map: THREE.Texture };
-        };
-        textures.push(meshWithMaterial.material.map);
+        arrowsToRemove.push(mesh);
       }
     });
-    const animation = () => {
-      textures.forEach((texture) => {
-        const mutableTexture = texture as unknown as { offset: { y: number } };
-        mutableTexture.offset.y = (mutableTexture.offset.y + 0.02) % 10000;
-      });
-    };
-    renderMixins.set("road-arrow", animation);
+    arrowsToRemove.forEach(arrow => {
+      if (arrow.parent) {
+        arrow.parent.remove(arrow);
+      }
+    });
+    console.log(`已移除 ${arrowsToRemove.length} 个道路箭头`);
   };
 
   // 添加设备名称标识
@@ -255,13 +275,85 @@ export function useDataCenter(externalContainer?: Ref<HTMLElement | null>) {
 
   // 开始模拟告警
   const startWarming = () => {
-    const handle = () => {
-      if (warmingCurrent.value) {
-        warmingCurrent.value.traverse((mesh: THREE.Object3D) => {
-          if (!(mesh instanceof THREE.Mesh)) return;
-          const meshWithCurrentHex = mesh as unknown as THREE.Mesh & {
-            currentHex: number;
+    // 停止之前的定时器
+    if (warmingTimer.value) {
+      window.clearInterval(warmingTimer.value);
+      warmingTimer.value = null;
+    }
+
+    // 预警设备名称列表（与 WidgetPanel06.vue 中的预警列表对应）
+    const alarmDeviceNames = [
+      "1# 服务器机柜",
+      "2# 服务器机柜",
+      "3# 服务器机柜",
+      "1# 网络设备",
+      "6# 网络设备",
+      "1# 电源柜",
+      "2# 电源柜",
+      "3# 电源柜",
+      "4# 电源柜",
+      "5# 电源柜",
+      "6# 电源柜"
+    ];
+
+    console.log("设备数组内容:", devices.value);
+    console.log("设备数组长度:", devices.value.length);
+
+    // 根据设备名称找到对应的索引
+    // 现在设备数组可能包含了多个设备组的设备，我们需要根据 LabelPositions 数组中的位置来匹配
+    const alarmDeviceIndices = alarmDeviceNames.map(name => {
+      const labelIndex = LabelPositions.findIndex(pos => pos.name === name);
+      console.log(`设备 "${name}" 在 LabelPositions 中的索引:`, labelIndex);
+      return labelIndex;
+    }).filter(index => index !== -1); // 过滤掉未找到的设备
+
+    console.log("告警设备索引:", alarmDeviceIndices);
+
+    // 瞬间标红所有告警设备
+    alarmDeviceIndices.forEach(index => {
+      const device = devices.value[index];
+      if (device) {
+        console.log(`找到告警设备 ${index}:`, device);
+        device.traverse((originalMesh: THREE.Object3D) => {
+          if (!(originalMesh instanceof THREE.Mesh)) return;
+          const mesh = originalMesh as unknown as THREE.Mesh & {
+            currentHex?: number;
           };
+          if (Array.isArray(mesh.material)) {
+            mesh.material = mesh.material.map((m) => m.clone());
+          } else {
+            mesh.material = mesh.material.clone();
+          }
+          const material = Array.isArray(mesh.material)
+            ? mesh.material[0]
+            : mesh.material;
+          if (material && "emissive" in material) {
+            const emissiveMaterial = material as unknown as {
+              emissive: { getHex: () => number; setHex: (hex: number) => void };
+            };
+            mesh.currentHex =
+              mesh.currentHex ?? emissiveMaterial.emissive.getHex();
+            emissiveMaterial.emissive.setHex(0xff0000);
+          }
+        });
+      } else {
+        console.warn(`未找到索引为 ${index} 的设备`);
+      }
+    });
+  };
+
+  // 停止模拟告警
+  const stopWarming = () => {
+    if (warmingTimer.value) {
+      window.clearInterval(warmingTimer.value);
+      warmingTimer.value = null;
+    }
+    // 恢复所有设备的原始颜色
+    devices.value.forEach(device => {
+      if (device) {
+        device.traverse((mesh: THREE.Object3D) => {
+          if (!(mesh instanceof THREE.Mesh)) return;
+          const meshWithCurrentHex = mesh as unknown as { currentHex: number };
           if (Array.isArray(meshWithCurrentHex.material)) {
             meshWithCurrentHex.material.forEach((m) => {
               if (m && "emissive" in m) {
@@ -282,49 +374,7 @@ export function useDataCenter(externalContainer?: Ref<HTMLElement | null>) {
           }
         });
       }
-      const index = sample([0, 1, 2, 3, 4, 5]);
-      warmingCurrent.value = devices.value[index];
-
-      warmingCurrent.value.traverse((originalMesh: THREE.Object3D) => {
-        if (!(originalMesh instanceof THREE.Mesh)) return;
-        const mesh = originalMesh as unknown as THREE.Mesh & {
-          currentHex?: number;
-        };
-        if (Array.isArray(mesh.material)) {
-          mesh.material = mesh.material.map((m) => m.clone());
-        } else {
-          mesh.material = mesh.material.clone();
-        }
-        const material = Array.isArray(mesh.material)
-          ? mesh.material[0]
-          : mesh.material;
-        if (material && "emissive" in material) {
-          const emissiveMaterial = material as unknown as {
-            emissive: { getHex: () => number; setHex: (hex: number) => void };
-          };
-          mesh.currentHex =
-            mesh.currentHex ?? emissiveMaterial.emissive.getHex();
-          emissiveMaterial.emissive.setHex(0xff0000);
-        }
-      });
-    };
-    handle();
-    warmingTimer.value = setInterval(handle, 1000 * 2);
-  };
-
-  // 停止模拟告警
-  const stopWarming = () => {
-    if (warmingCurrent.value) {
-      warmingCurrent.value.traverse((mesh: THREE.Object3D) => {
-        if (!(mesh instanceof THREE.Mesh)) return;
-        const meshWithCurrentHex = mesh as unknown as { currentHex: number };
-        mesh.material.emissive.setHex(meshWithCurrentHex.currentHex);
-      });
-    }
-    if (warmingTimer.value) {
-      window.clearInterval(warmingTimer.value);
-      warmingTimer.value = null;
-    }
+    });
   };
 
   onMounted(() => {
@@ -338,7 +388,6 @@ export function useDataCenter(externalContainer?: Ref<HTMLElement | null>) {
         if (scene.value) {
           console.log("场景已初始化，开始加载模型");
           await loadModel();
-          addRoadArrowAnimation();
           addDeviceLabels();
         } else {
           console.error("场景初始化失败，无法继续加载模型");

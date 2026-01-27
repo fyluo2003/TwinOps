@@ -1,6 +1,6 @@
 <template>
   <LayoutPanel title="预警情况">
-    <div class="wrap" @click="showAlarmList = true">
+    <div class="wrap">
       <div class="item-list" ref="container">
         <div
           class="item"
@@ -19,12 +19,6 @@
         </div>
       </div>
     </div>
-    <AlarmDeviceList
-      v-if="showAlarmList"
-      :devices="alarmDevices"
-      @close="showAlarmList = false"
-      @click.stop
-    />
   </LayoutPanel>
 </template>
 <script setup lang="ts">
@@ -69,148 +63,70 @@ watch(showAlarmList, (newVal) => {
 
 const list = ref<AlarmItem[]>([
   {
-    name: "1#服务器机柜",
+    name: "1# 服务器机柜",
     event: "温度过高",
     type: 1,
     time: "08:21",
   },
   {
-    name: "23#网络设备",
-    event: "网络异常",
-    type: 3,
-    time: "08:32",
-  },
-  {
-    name: "9#电源柜",
-    event: "电压波动",
-    type: 2,
-    time: "09:44",
-  },
-  {
-    name: "2#服务器机柜",
+    name: "2# 服务器机柜",
     event: "内存过载",
     type: 3,
     time: "12:53",
   },
   {
-    name: "18#空调系统",
-    event: "制冷异常",
-    type: 3,
-    time: "14:15",
-  },
-  {
-    name: "7#UPS设备",
-    event: "电池低电压",
-    type: 2,
-    time: "14:45",
-  },
-  {
-    name: "26#交换机",
-    event: "端口故障",
-    type: 2,
-    time: "14:59",
-  },
-  {
-    name: "3#服务器机柜",
+    name: "3# 服务器机柜",
     event: "硬盘故障",
     type: 1,
     time: "16:42",
   },
   {
-    name: "6#网络设备",
+    name: "1# 网络设备",
+    event: "网络异常",
+    type: 3,
+    time: "08:32",
+  },
+  {
+    name: "6# 网络设备",
     event: "丢包率过高",
     type: 2,
     time: "17:43",
   },
   {
-    name: "1#服务器机柜",
-    event: "CPU过载",
-    type: 1,
-    time: "08:21",
-  },
-  {
-    name: "23#温湿度传感器",
-    event: "湿度超标",
-    type: 3,
-    time: "08:32",
-  },
-  {
-    name: "9#防火墙",
-    event: "流量异常",
+    name: "1# 电源柜",
+    event: "电压波动",
     type: 2,
     time: "09:44",
   },
   {
-    name: "2#电源柜",
+    name: "2# 电源柜",
     event: "电流过高",
     type: 3,
     time: "12:53",
   },
   {
-    name: "18#服务器机柜",
-    event: "风扇故障",
+    name: "3# 电源柜",
+    event: "电压波动",
+    type: 2,
+    time: "09:44",
+  },
+  {
+    name: "4# 电源柜",
+    event: "电流过高",
     type: 3,
-    time: "14:15",
+    time: "12:53",
   },
   {
-    name: "7#路由器",
-    event: "连接中断",
+    name: "5# 电源柜",
+    event: "电压波动",
     type: 2,
-    time: "14:45",
+    time: "09:44",
   },
   {
-    name: "26#负载均衡器",
-    event: "性能下降",
-    type: 2,
-    time: "14:59",
-  },
-  {
-    name: "7#服务器机柜",
-    event: "内存泄漏",
-    type: 2,
-    time: "14:45",
-  },
-  {
-    name: "26#存储设备",
-    event: "读写错误",
-    type: 2,
-    time: "14:59",
-  },
-  {
-    name: "7#备份系统",
-    event: "备份失败",
-    type: 2,
-    time: "14:45",
-  },
-  {
-    name: "26#监控设备",
-    event: "信号丢失",
-    type: 2,
-    time: "14:59",
-  },
-  {
-    name: "7#安全设备",
-    event: "入侵检测",
-    type: 2,
-    time: "14:45",
-  },
-  {
-    name: "26#门禁系统",
-    event: "权限异常",
-    type: 2,
-    time: "14:59",
-  },
-  {
-    name: "7#消防设备",
-    event: "烟雾报警",
-    type: 2,
-    time: "14:45",
-  },
-  {
-    name: "26#环境传感器",
-    event: "温度异常",
-    type: 2,
-    time: "14:59",
+    name: "6# 电源柜",
+    event: "电流过高",
+    type: 3,
+    time: "12:53",
   },
 ]);
 
@@ -297,14 +213,15 @@ onUnmounted(() => {
     align-items: center;
     padding: 5px;
     font-size: 16px;
-    background-color: #f8fafc;
-    border-radius: 4px;
-    border: 1px solid #e2e8f0;
+    background: rgba(15, 23, 42, 0.6);
+    border-radius: 6px;
+    border: 1px solid rgba(148, 163, 184, 0.3);
     transition: all 0.2s ease;
 
     &:hover {
-      background-color: #f1f5f9;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      background: rgba(30, 41, 59, 0.8);
+      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+      border-color: rgba(96, 165, 250, 0.5);
     }
 
     .item-circle {
@@ -317,11 +234,11 @@ onUnmounted(() => {
     .item-name {
       width: 50%;
       padding-left: 15px;
-      color: #1e293b;
+      color: #e2e8f0;
     }
     .item-type {
       width: 30%;
-      color: #475569;
+      color: #94a3b8;
     }
     .item-time {
       width: 20%;

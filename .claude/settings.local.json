@@ -29,7 +29,12 @@
       "Bash(http-server:*)",
       "Bash(gltfjsx:*)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(DEBUG=sass*)",
+      "Bash(npm run build-only)",
+      "Bash(npm outdated:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(tree:*)"
     ]
   }
 }

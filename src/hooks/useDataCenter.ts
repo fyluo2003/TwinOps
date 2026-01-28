@@ -353,9 +353,12 @@ export function useDataCenter(externalContainer?: Ref<HTMLElement | null>) {
       if (device) {
         device.traverse((mesh: THREE.Object3D) => {
           if (!(mesh instanceof THREE.Mesh)) return;
-          const meshWithCurrentHex = mesh as unknown as { currentHex: number };
+          const meshWithCurrentHex = mesh as unknown as {
+    currentHex: number;
+    material: THREE.Material | THREE.Material[]
+  };
           if (Array.isArray(meshWithCurrentHex.material)) {
-            meshWithCurrentHex.material.forEach((m) => {
+            meshWithCurrentHex.material.forEach((m: THREE.Material) => {
               if (m && "emissive" in m) {
                 const emissiveMaterial = m as unknown as {
                   emissive: { setHex: (hex: number) => void };
